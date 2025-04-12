@@ -8,7 +8,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    
+
     gtag('config', 'G-5ZCMWNJT02');
     </script>
 
@@ -26,75 +26,93 @@
 
 
     <style>
-        /* Apply base fonts */
         body {
             font-family: 'Nunito Sans', sans-serif;
-            padding-top: 64px; /* Adjust based on header height */
-            background-color: #fdfbf5; /* Very light beige background */
-            color: #4f4a45; /* Dark grayish-brown text */
+            padding-top: 64px; /* Fixed header height */
+            background-color: #fdfbf5;
+            color: #4f4a45;
         }
-        /* Style headings with Lora font */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Lora', serif;
-            color: #8a3f3f; /* Terracotta/dark red color for headings */
+            color: #8a3f3f;
         }
-        /* Style sections */
         section {
-            padding: 4rem 1rem; /* py-16 px-4 */
             scroll-margin-top: 64px; /* Offset for fixed header */
         }
-        /* Style images with more rounding */
         img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 1rem; /* rounded-2xl */
-            box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Adjusted shadow */
+            border-radius: 1rem;
+            box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-        /* Header styling */
         header {
-            height: 64px; /* Fixed height for header */
-            background-color: #8a3f3f; /* Terracotta background */
+            /* Header height is controlled by content + padding, ensure min-height */
+            min-height: 64px;
+            background-color: #8a3f3f;
         }
-        /* Footer styling */
         footer {
-            background-color: #5a6e5a; /* Olive green background */
-            color: #fdfbf5; /* Light beige text */
+            background-color: #5a6e5a;
+            color: #fdfbf5;
         }
-        /* Custom border color for headings */
         .heading-border {
-             border-bottom: 2px solid #b08968; /* Light brown border */
-             padding-bottom: 0.5rem; /* pb-2 */
+             border-bottom: 2px solid #b08968;
+             padding-bottom: 0.5rem;
              display: inline-block;
         }
-        /* Link styling */
         a {
-            color: #8a3f3f; /* Terracotta links */
+            color: #8a3f3f;
             transition: color 0.2s ease-in-out;
         }
         a:hover {
-            color: #b08968; /* Light brown hover */
+            color: #b08968;
         }
-        /* Header link styling */
-        header a {
-            color: #fdfbf5; /* Light beige text */
+        header a:not(.nav-link-mobile) { /* Exclude mobile links from this specific header text color */
+             color: #fdfbf5;
         }
-         header a:hover {
-            color: #e0dcd1; /* Lighter beige hover */
+        header a:hover:not(.nav-link-mobile) {
+             color: #e0dcd1;
         }
-        /* Section background */
+        /* Specific styling for mobile nav links if needed (Tailwind covers most) */
+        .nav-link-mobile {
+            color: #fdfbf5; /* Ensure mobile links are white */
+        }
+        .nav-link-mobile:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Slight hover background */
+            color: #e0dcd1;
+        }
         .section-bg-alt {
-            background-color: #edeae0; /* Slightly darker beige */
-            border-radius: 1rem; /* rounded-2xl */
-             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* shadow-sm */
+            background-color: #edeae0;
+            border-radius: 1rem;
+             box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
         }
+
+        /* Style for the hamburger icon lines */
+        .hamburger-line {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: #fdfbf5; /* White lines */
+            transition: all 0.3s ease-in-out;
+        }
+        /* Add animations for open state if desired (more complex) */
+
     </style>
 </head>
-<body class="antialiased"> <header class="text-white p-4 shadow-md fixed top-0 left-0 right-0 z-50 flex items-center">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-xl font-semibold tracking-wide">ΚΑΘΑΡΙΣΤΗΡΙΟ ΨΑΡΑΔΕΛΛΗΣ ΣΑΚΗΣ</a>
+<body class="antialiased">
+    <!-- Header: Added Hamburger Button and Mobile Menu Logic -->
+    <header class="text-white p-4 shadow-md fixed top-0 left-0 right-0 z-50 flex items-center">
+        <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <!-- Logo/Title -->
+            <a href="#" class="text-lg sm:text-xl font-semibold tracking-wide">ΚΑΘΑΡΙΣΤΗΡΙΟ ΨΑΡΑΔΕΛΛΗΣ ΣΑΚΗΣ</a>
 
+            <!-- Hamburger Button -->
+            <button id="menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
 
-            <nav>
+            <!-- Desktop Navigation (Visible md and up) -->
+            <nav class="hidden md:block">
               <ul class="flex space-x-6">
                   <li><a href="#about" class="nav-link py-2 px-3 rounded-md hover:bg-rose-950 hover:scale-105 transform transition duration-300 ease-in-out inline-block">Ποιοι είμαστε</a></li>
                   <li><a href="#services" class="nav-link py-2 px-3 rounded-md hover:bg-rose-950 hover:scale-105 transform transition duration-300 ease-in-out inline-block">Υπηρεσίες</a></li>
@@ -102,114 +120,113 @@
                   <li><a href="#contact" class="nav-link py-2 px-3 rounded-md hover:bg-rose-950 hover:scale-105 transform transition duration-300 ease-in-out inline-block">Επικοινωνία</a></li>
               </ul>
           </nav>
+        </div>
 
+        <!-- Mobile Menu (Hidden by default, shown on toggle) -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-rose-900/95 backdrop-blur-sm shadow-lg z-40">
+            <ul class="flex flex-col items-center space-y-2 py-4">
+                <li><a href="#about" class="nav-link-mobile block w-full text-center py-3 px-4 rounded-md text-base font-medium transition duration-150 ease-in-out">Ποιοι είμαστε</a></li>
+                <li><a href="#services" class="nav-link-mobile block w-full text-center py-3 px-4 rounded-md text-base font-medium transition duration-150 ease-in-out">Υπηρεσίες</a></li>
+                <li><a href="#technology" class="nav-link-mobile block w-full text-center py-3 px-4 rounded-md text-base font-medium transition duration-150 ease-in-out">Τεχνολογία</a></li>
+                <li><a href="#contact" class="nav-link-mobile block w-full text-center py-3 px-4 rounded-md text-base font-medium transition duration-150 ease-in-out">Επικοινωνία</a></li>
+            </ul>
         </div>
     </header>
 
-    <main class="container mx-auto mt-8 px-4">
+    <!-- Main Content (No changes needed here from previous responsive version) -->
+    <main class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
 
-
-        <section id="about">
-          <div class="grid md:grid-cols-2 gap-12 items-center">
-            <!-- Left image -->
+        <section id="about" class="py-12 md:py-16">
+          <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div class="md:order-1">
-              <img src="https://i.ibb.co/BJDbfxn/v2-omprela.png?text=[Εικόνα+Εταιρείας]" alt="Εικόνα που αντιπροσωπεύει την εταιρεία" class="w-full h-auto">
+              <img src="https://i.ibb.co/BJDbfxn/v2-omprela.png?text=[Εικόνα+Εταιρείας]" alt="Εικόνα που αντιπροσωπεύει την εταιρεία" class="w-full h-auto object-cover">
             </div>
-        
-            <!-- Right text content + second image -->
-            <div class="md:order-2 text-center">
-              <h2 class="text-3xl font-semibold mb-4 heading-border">Ποιοι είμαστε</h2>
-              <br>
-              <p class="mt-4 text-lg leading-relaxed">
+            <div class="md:order-2 text-center md:text-left">
+              <h2 class="text-2xl sm:text-3xl font-semibold mb-4 heading-border">Ποιοι είμαστε</h2>
+              <p class="mt-4 text-base sm:text-lg leading-relaxed">
                 Με πάνω από 30 χρόνια εμπειρίας στη Λέσβο, το καθαριστήριο Ψαραδέλλης προσφέρει εξειδικευμένη φροντίδα για τα χαλιά σας με συνέπεια και επαγγελματισμό.
               </p>
-              <p class="text-lg leading-relaxed">
+              <p class="text-base sm:text-lg leading-relaxed mt-2">
                 Η μακρόχρονη πορεία μας εγγυάται άριστη εξυπηρέτηση.
               </p>
-              <br><br>
-        
-              <!-- New image inside text part, centered -->
               <div class="mt-6 flex justify-center">
-                <img src="https://i.ibb.co/VfnCWWy/sakis.jpg" alt="Σάκης Ψαραδέλλης" class="w-64 h-auto rounded-3xl shadow-lg">
+                <img src="https://i.ibb.co/VfnCWWy/sakis.jpg" alt="Σάκης Ψαραδέλλης" class="w-48 h-auto sm:w-64 rounded-3xl shadow-lg">
               </div>
             </div>
           </div>
         </section>
 
-        <section id="services" class="section-bg-alt">
-             <div class="grid md:grid-cols-2 gap-12 items-center">
-                 <div class="md:order-1">
-                    <h2 class="text-3xl font-semibold mb-4 heading-border">Εξειδίκευση</h2>
-                    <p class="mt-4 text-lg leading-relaxed">
+        <section id="services" class="section-bg-alt py-12 md:py-16 px-4 sm:px-6 lg:px-8 my-8 md:my-12">
+             <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                 <div class="md:order-1 text-center md:text-left">
+                    <h2 class="text-2xl sm:text-3xl font-semibold mb-4 heading-border">Εξειδίκευση</h2>
+                    <p class="mt-4 text-base sm:text-lg leading-relaxed">
                         Αναλαμβάνουμε τον καθαρισμό και τη φύλαξη για χαλιά, μοκέτες, κουβέρτες, παπλώματα, φλοκάτες, κιλίμια.
                     </p>
-                    <p class="text-lg leading-relaxed">Εφαρμόζουμε εξειδικευμένες μεθόδους για άψογο αποτέλεσμα και προστασία των υφασμάτων σας.</p>
+                    <p class="text-base sm:text-lg leading-relaxed mt-2">Εφαρμόζουμε εξειδικευμένες μεθόδους για άψογο αποτέλεσμα και προστασία των υφασμάτων σας.</p>
                 </div>
                  <div class="md:order-2">
-                    <img src="https://i.ibb.co/spGm8RJw/apothiki.png?text=[Εικόνα+Υπηρεσιών]" alt="Εικόνα σχετική με τις υπηρεσίες καθαρισμού" class="w-full h-auto">
+                    <img src="https://i.ibb.co/spGm8RJw/apothiki.png?text=[Εικόνα+Υπηρεσιών]" alt="Εικόνα σχετική με τις υπηρεσίες καθαρισμού" class="w-full h-auto object-cover">
                 </div>
             </div>
         </section>
 
-        <section id="technology">
+        <section id="technology" class="py-12 md:py-16">
             <div class="grid md:grid-cols-3 gap-8 items-center">
                  <div class="md:col-span-2 md:order-1 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <img src="https://i.ibb.co/xtwsWg6L/skorpion.png?text=[Εικόνα+Μηχανημάτων]" alt="Εικόνα μηχανημάτων καθαρισμού" class="w-full h-auto">
-                    <img src="https://i.ibb.co/HTJ18Qjb/plintirio.png?text=[Εικόνα+Εγκαταστάσεων]" alt="Εικόνα εγκαταστάσεων φύλαξης" class="w-full h-auto">
+                    <img src="https://i.ibb.co/xtwsWg6L/skorpion.png?text=[Εικόνα+Μηχανημάτων]" alt="Εικόνα μηχανημάτων καθαρισμού" class="w-full h-auto object-cover">
+                    <img src="https://i.ibb.co/HTJ18Qjb/plintirio.png?text=[Εικόνα+Εγκαταστάσεων]" alt="Εικόνα εγκαταστάσεων φύλαξης" class="w-full h-auto object-cover">
                 </div>
-                 <div class="md:col-span-1 md:order-2">
-                     <h2 class="text-3xl font-semibold mb-4 heading-border">Τεχνολογία & Εγκαταστάσεις</h2>
-                    <p class="mt-4 text-lg leading-relaxed">
+                 <div class="md:col-span-1 md:order-2 text-center md:text-left">
+                     <h2 class="text-2xl sm:text-3xl font-semibold mb-4 heading-border">Τεχνολογία & Εγκαταστάσεις</h2>
+                    <p class="mt-4 text-base sm:text-lg leading-relaxed">
                         Διαθέτουμε μηχανήματα τελευταίας τεχνολογίας και σύγχρονες εγκαταστάσεις για άριστο καθαρισμό και ασφαλή φύλαξη όλο τον χρόνο.
                     </p>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="section-bg-alt py-20 px-6 md:px-12 lg:px-24">
-            <div class="grid md:grid-cols-2 gap-16 items-start">
-              
-              <!-- Contact Info -->
-              <div class="md:order-1 contact-info space-y-4">
-                <h2 class="text-4xl font-bold mb-6 heading-border"><br><br><br>Επικοινωνία</h2>
-                <p class="text-2xl font-semibold">Ψαραδέλλης Σάκης</p>
-                <p class="text-lg">
+        <section id="contact" class="section-bg-alt py-12 md:py-20 px-4 sm:px-6 lg:px-8 my-8 md:my-12">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
+              <div class="md:order-1 contact-info space-y-4 text-center md:text-left">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 heading-border">Επικοινωνία</h2>
+                <p class="text-xl sm:text-2xl font-semibold">Ψαραδέλλης Σάκης</p>
+                <p class="text-base sm:text-lg">
                   <strong class="font-semibold">Κινητό:</strong>
-                  <a href="tel:6932743973" class="hover:underline text-blue-600">6932743973</a>
+                  <a href="tel:6932743973" class="hover:underline text-blue-600 break-words">6932743973</a>
                 </p>
-                <p class="text-lg">
+                <p class="text-base sm:text-lg">
                   <strong class="font-semibold">Σταθερό:</strong>
-                  <a href="tel:2251031074" class="hover:underline text-blue-600">22510 31074</a>
+                  <a href="tel:2251031074" class="hover:underline text-blue-600 break-words">22510 31074</a>
                 </p>
-                <p class="text-lg">
+                <p class="text-base sm:text-lg">
                   <strong class="font-semibold">Διεύθυνση:</strong> Μόρια, Μυτιλήνη 81100, Λέσβος
                 </p>
-                <p class="text-lg">
+                <p class="text-base sm:text-lg">
                   <strong class="font-semibold">Email:</strong>
-                  <a href="mailto:sakis1ps@gmail.com" class="hover:underline text-blue-600">sakis1ps@gmail.com</a>
+                  <a href="mailto:sakis1ps@gmail.com" class="hover:underline text-blue-600 break-words">sakis1ps@gmail.com</a>
                 </p>
               </div>
-              
-              <!-- Image -->
               <div class="md:order-2">
                 <img src="https://i.ibb.co/Y78fJfDw/contact.png?text=[Εικόνα+Επικοινωνίας]"
                      alt="Εικόνα σχετική με την επικοινωνία"
-                     class="w-full h-auto rounded-2xl shadow-md">
+                     class="w-full h-auto object-cover rounded-2xl shadow-md">
               </div>
             </div>
           </section>
-          
 
-          <section id="final-image" class="text-center">
-            <h2 class="text-3xl font-semibold mb-4 heading-border">Η Δουλειά μας</h2>
-            <img src="https://i.ibb.co/QF1Y6Z71/v2.jpg" alt="Μεγάλη εικόνα παρουσίασης" style="width: 50%; height: auto; display: block; margin: 0 auto;">
+          <section id="final-image" class="text-center py-12 md:py-16">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-6 heading-border">Η Δουλειά μας</h2>
+            <img src="https://i.ibb.co/QF1Y6Z71/v2.jpg"
+                 alt="Μεγάλη εικόνα παρουσίασης"
+                 class="w-full max-w-2xl mx-auto block h-auto object-cover rounded-2xl shadow-lg">
           </section>
 
     </main>
 
     <footer class="p-6 mt-12">
-        <div class="container mx-auto text-center">
-            <p>&copy; <span id="year"></span> Καθαριστήριο Χαλιών Ψαραδέλλης Σάκης. Με επιφύλαξη παντός δικαιώματος.</p>
+        <div class="container mx-auto max-w-screen-xl text-center">
+            <p>© <span id="year"></span> Καθαριστήριο Χαλιών Ψαραδέλλης Σάκης. Με επιφύλαξη παντός δικαιώματος.</p>
             <p class="text-sm opacity-80 mt-2">Σχεδιασμός Ιστοσελίδας: Σάκης</p>
         </div>
     </footer>
@@ -217,6 +234,30 @@
     <script>
         // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Hamburger Menu Toggle
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a'); // Get all links in the mobile menu
+
+        menuButton.addEventListener('click', () => {
+            const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+            // Optional: Add class to body to prevent scrolling when menu is open
+            // document.body.classList.toggle('overflow-hidden');
+        });
+
+        // Close menu when a link is clicked (for single-page navigation)
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden'); // Hide the menu
+                menuButton.setAttribute('aria-expanded', 'false'); // Update ARIA state
+                // Optional: Remove body overflow lock if you added it
+                // document.body.classList.remove('overflow-hidden');
+            });
+        });
+
     </script>
 
 </body>
